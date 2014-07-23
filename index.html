@@ -1,0 +1,181 @@
+					
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="css/lungo.css">
+	<link rel="stylesheet" href="css/lungo.icon.css">
+	<link rel="stylesheet" href="css/lungo.theme.css">
+	<style type="text/css">
+		.grade{
+			font-size: 14px !important;
+			
+		}
+		.red,.blue{
+			font-weight: bold !important;
+			background-color: #f0f5ef;
+			border-radius: 5px;
+			padding: 0px 3px;
+		}
+		.blue{
+			color: #12d !important
+		}
+		.red{
+			color: #d21 !important
+		}
+		article.active{
+			overflow-y: scroll !important;
+		}
+		#logout:hover .icon{
+			color: #d21
+		}
+	</style>
+</head>
+<body>
+	<aside id="features" data-transition="left">
+		<header data-title="Disciplinas">
+			
+		</header>
+
+		<article class="list scroll active">
+			<ul id="aside-itens">
+				<li data-view-article="home" data-icon="home">
+					<strong>Home</strong>
+				</li>
+			</ul>
+		</article>
+	</aside>
+<!-- 	<section id="login" data-transition="slide" class="drag">
+		<header id="login-header"><img src="logo.png" class="title centered"></header>
+		<article id="form-login" class="list active">
+			<div class="form">
+				<li>Faça seu login</li>
+				<fieldset data-icon="user"><span class="icon user text large"></span>
+					<input id="aluno" type="text" placeholder="login" class="border large text bold">
+				</fieldset>
+				<fieldset data-icon="lock"><span class="icon lock"></span>
+					<input id="senha" type="password" placeholder="senha" class="border large text bold" >
+				</fieldset>
+
+				<fieldset>
+					<label class="anchor text bold">Mantenha-me conectado</label>
+					<input id="lembrar" type="checkbox" class="inline right">
+				</fieldset>
+				<button id="submit" data-view-section="main" class="anchor margin-bottom" data-label="Entrar"></button>
+			</div>
+		</article>
+	</section> -->
+	<section id="main" data-transition="slide" data-aside="features" class="drag">
+		<header id="main-header">
+			<nav>
+				<a href="#" data-view-aside="features" data-icon="menu"></a>
+			</nav>
+			
+			
+		</header>
+
+		<article id="cidades" class="list scroll indented active">
+			<li class="theme">
+				<div class="on-right"> </div>
+				<strong>Cidades</strong>
+			</li>
+
+			<ul id="home-itens">
+				<li><a herf="#" data-view-section="caratinga">Caratinga</a></li>
+				<li><a herf="#" data-view-section="ubaporanga">Ubaporanga</a></li>
+
+			</ul>
+		</article>
+	</section>
+	<section id="caratinga" data-transition="slide" classe="drag">
+		<header id="caratinga-header">
+			<nav>
+				<a href="#" data-view-aside="caratinga-aside" data-icon="menu"></a>
+			</nav>
+			<nav class="on-right">
+				<a id="refresh" href="#" data-view-section="main" data-icon="home"></a>
+			</nav>
+		</header>
+		<article id="caratinga-bairros" class="list scroll indented active">
+			<li class="theme">
+				<div class="on-right"> </div>
+				<strong>Bairros de Caratinga</strong>
+			</li>
+			<li><a herf="#" data-view-article="caratinga-centro">Centro</a></li>
+			<li><a herf="#" data-view-article="caratinga-anapolis">Anápolis</a></li>
+		</article>
+		<article id="caratinga-centro" class="list scroll indented ">
+			<li class="theme" >
+				<div class="on-right">Caratinga </div>
+
+				<strong>Ruas do Centro</strong>
+				
+			</li>
+			<li><a herf="#" data-view-section="listagem-eleitores">Rua Raul Soares</a></li>
+			<li><a herf="#" data-view-section="listagem-eleitores">Av. Moacir de mattos</a></li>
+		
+		</article>
+		<article id="caratinga-anapolis" class="list scroll indented ">
+			<li class="theme">
+				<div class="on-right">Caratinga </div>
+
+				<strong>Ruas do Anápolis</strong>
+				
+			</li>
+
+			<li><a herf="#" data-view-section="listagem-eleitores">Rua 1</a></li>
+			<li><a herf="#" data-view-section="listagem-eleitores">Rua 2</a></li>
+			
+		</article>
+<footer><nav><a data-view-article="caratinga-bairros" class=" icon arrow-left" ></a></nav></footer>
+	</section>
+	<section id="ubaporanga" data-transition="slide" classe="drag">
+		<header id="ubaporanga-header">
+			<nav>
+				<a href="#" data-view-aside="ubaporanga-aside" data-icon="menu"></a>
+			</nav>
+			<nav class="on-right">
+				<a id="refresh" href="#" data-view-section="main" data-icon="home"></a>
+			</nav>
+		</header>
+		<article id="ubaporanga-bairros" class="list scroll indented active">
+			<li class="theme">
+				
+				<strong>Bairros de Ubaporanga</strong>
+			</li>
+			<li><a herf="#" data-view-article="ubaporanga-centro">Centro</a></li>
+			<li><a herf="#" data-view-article="ubaporanga-bairro2">Barirro 2</a></li>
+		</article>
+		<article id="ubaporanga-centro" class="list scroll indented ">
+			<li class="theme">
+				<div class="on-right">Ubaporanga </div>
+				<strong>Ruas do Centro</strong>
+			</li>
+
+			<li><a herf="#" data-view-section="listagem-eleitores">Rua 1</a></li>
+			<li><a herf="#" data-view-section="listagem-eleitores">Rua 2</a></li>
+			
+		</article>
+		<article id="ubaporanga-bairro2" class="list scroll indented ">
+			<li class="theme" >
+				<div class="on-right">Ubaporanga </div>
+
+				<strong>Ruas do Bairro 2</strong>
+				
+			</li>
+
+			<li><a herf="#" data-view-section="listagem-eleitores">Rua 3</a></li>
+			<li><a herf="#" data-view-section="listagem-eleitores">Rua 4</a></li>
+			
+		</article>
+		<footer><nav><a data-view-article="ubaporanga-bairros" class="icon arrow-left" ></a></nav></footer>
+	</section>
+	<script src="js/quo.js"></script>
+	<script src="js/lungo.js"></script>	
+	<script type="text/javascript">
+		Lungo.init({
+
+		});
+	</script>
+	<!-- // <script src="js/app.js"></script>	 -->
+</body>
+</html>
