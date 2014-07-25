@@ -3,7 +3,7 @@ var usuario = localStorage.getItem('usuario');
 $$(function() {
 	var load = function (usuario) {
 		
-		if (usuario != null) {
+		if (true/*usuario != null*/) {
 			$$("#login-header").hide();
 			$$("#main-header").show();
 			$$("#form-login").removeClass("active");
