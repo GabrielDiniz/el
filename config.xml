@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <widget xmlns   = "http://www.w3.org/ns/widgets"
     xmlns:gap   = "http://phonegap.com/ns/1.0"
-    id          = "com.flux.adx"
+    id          = "com.gz.eleicoes"
 
     versionCode = "1" 
     version     = "1.0.0" 
@@ -9,16 +9,16 @@
 
     <!-- versionCode is optional and Android only -->
 
-    <name>Adx 2.0</name>
+    <name>Eleitores</name>
     <icon src="icon.png"/>
     <description>
-        Adx 2.0 Mobile
+        Eleitores Mobile
     </description>
     <!-- <gap:platform name="ios" /> -->
     <gap:platform name="android" />
     <!-- <gap:platform name="winphone" /> -->
     <author href="adx.doctum.edu.br" email="suporteadx@doctum.edu.br">
-        Flux Softwares 
+        GZ softwae 
     </author>
     <feature name="http://api.phonegap.com/1.0/network"/>
     <!-- <feature name="InAppBrowser">
