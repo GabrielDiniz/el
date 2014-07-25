@@ -1,116 +1,73 @@
-var BASE_URL = 'http://sicof.doctum.edu.br/';
-var aluno = localStorage.getItem('aluno');
-var unidade = localStorage.getItem('unidade');
+var BASE_URL = 'http://192.168.10.108/eleitores/back/';
+var usuario = localStorage.getItem('usuario');
 $$(function() {
-	var load = function (aluno,unidade) {
+	var load = function (usuario) {
 		
-		if (aluno != null) {
+		if (usuario != null) {
 			$$("#login-header").hide();
 			$$("#main-header").show();
 			$$("#form-login").removeClass("active");
 			$$("#home").addClass("active");
-			$$.json(
-				BASE_URL+'notasMobile.php',
-				{
-					aluno:aluno,
-					unidade:unidade
-				},
-				function(dados) {
-					console.log(dados);
-					for(var disciplina in dados){
-						/**
-						* Montando Menu-lateral
-						**/
-						$$('#aside-itens').append('\
-							<li data-view-article="'+dados[disciplina].abrev+'" data-icon="list" class="dinamic"> \
-								<strong>'+disciplina+'</strong> \
-							</li>'
-						);
-		
-						/**
-						* Montando página inicial
-						**/
-						if (parseFloat(dados[disciplina].nota)<70) {
-							cor = 'red';
-						} else{
-							cor = 'blue';
-						}
-						$$('#home-itens').append('\
-							<li>\
-								<a href="#" data-view-article="'+dados[disciplina].abrev+'"> <div class="on-right grade "> <span class="'+cor+'">'+parseFloat(dados[disciplina].nota).toFixed(1)+'</span></div>\
-									<strong>'+disciplina+'</strong>\
-								</a>\
-								<!--<small>Nota: <span class="'+cor+'">'+parseFloat(dados[disciplina].nota).toFixed(1)+'</span></small>-->\
-							</li>'
-						);
-		
-						/**
-						* Montando paginas das disciplinas
-						**/
-		
-						$$('#main').append('\
-							<article class="list indented dinamic" id="'+dados[disciplina].abrev+'">\
-								<li class="">\
-									<div class="on-right"> Nota </div>\
-									Agendamentos\
-									<small>'+disciplina+'</small>\
-								</li>\
-							</article>'
-						);
-		
-						/**
-						* Montando os agendamentos das disciplinas
-						**/
-						i=0;
-						agendamentos='';
-						for(var etapa in dados[disciplina].etapas){
-							
-							/**
-							* Montado etapas
-							**/
-							if (parseFloat(dados[disciplina].etapas[etapa].nota) < parseFloat(dados[disciplina].etapas[etapa].pontos)*0.7) {
-								cor = 'red';
-							} else{
-								cor = 'blue';
-							}
-							agendamentos=agendamentos+'\
-								<li class="theme">\
-									<div class="on-right grade "> <span class="'+cor+'">'+parseFloat(dados[disciplina].etapas[etapa].nota).toFixed(1)+'</span></div>\
-									<strong>'+etapa+'</strong>\
-								</li>\
-								<ul id="#agenda-'+dados[disciplina].abrev+'-'+i+'">';
-		
-							for (var agendamento in dados[disciplina].etapas[etapa].agenda){
-								if (parseFloat(dados[disciplina].etapas[etapa].agenda[agendamento].nota) < parseFloat(dados[disciplina].etapas[etapa].agenda[agendamento].valor)*0.7) {
-									cor = 'red';
-								} else{
-									cor = 'blue';
-								}
-								agendamentos = agendamentos + '\
-									<li>\
-										<div class="on-right grade "> <span class="'+cor+'">'+parseFloat(dados[disciplina].etapas[etapa].agenda[agendamento].nota).toFixed(1)+'</span></div>\
-										<strong>'+dados[disciplina].etapas[etapa].agenda[agendamento].nome+'</strong>\
-										<small>Data: '+dados[disciplina].etapas[etapa].agenda[agendamento].data+'</small>\
-										<small>Valor: '+dados[disciplina].etapas[etapa].agenda[agendamento].valor+'</small>\
-									</li>'
-								;
-							}
-		
-							agendamentos=agendamentos+'\
-								</ul>';
-							
-							i++;
-						}
-						$$('#'+dados[disciplina].abrev).append(agendamentos);
+			for(var cidade in dados){
+				$$("#cidades-itens").append('<li><a herf="#" data-view-section="'+dados[cidade].slug+'-bairros">'+dados[cidade].cidade+'</a></li>');
+				$$("body").append('\
+					<section id="'+dados[cidade].slug+'-bairros" data-transition="slide" classe="drag">\
+						<header id="'+dados[cidade].slug+'-header">\
+							<nav>\
+								<a href="#" data-view-aside="'+dados[cidade].slug+'-aside" data-icon="menu"></a>\
+							</nav>\
+							<nav class="on-right">\
+								<a id="refresh" href="#" data-view-section="main" data-icon="home"></a>\
+							</nav>\
+						</header>\
+						<article id="'+dados[cidade].slug+'-bairros" class="list scroll indented active">\
+							<li class="theme">\
+								<strong>Bairros de '+dados[cidade].cidade+'</strong>\
+							</li>\
+							<ul id="'+dados[cidade].slug+'-bairros-itens">\
+							</ul>\
+						</article>\
+						<footer>\
+							<nav>\
+								<a data-view-section="main" class=" icon arrow-left" ></a>\
+							</nav>\
+						</footer>\
+					</section>\
+				');
+				$$("body").append('\
+					<section id="'+dados[cidade].slug+'-ruas" data-transition="slide" classe="drag">\
+						<header id="'+dados[cidade].slug+'-ruas-header">\
+							<nav>\
+								<a href="#" data-view-aside="'+dados[cidade].slug+'-aside" data-icon="menu"></a>\
+							</nav>\
+							<nav class="on-right">\
+								<a id="refresh" href="#" data-view-section="main" data-icon="home"></a>\
+							</nav>\
+						</header>\
+						<footer>\
+							<nav>\
+								<a data-view-section="'+dados[cidade].slug+'-bairros" class="icon arrow-left" ></a>\
+							</nav>\
+						</footer>\
+					</section>\
+				');	
+				for(bairro in dados[cidade].bairros){
+					$$('#'+dados[cidade].slug+'-bairros-itens').append('<li><a herf="#" data-view-section="'+dados[cidade].slug+'-ruas" data-view-article="'+dados[cidade].slug+'-'+dados[cidade].bairros[bairro].slug+'">'+dados[cidade].bairros[bairro].bairro+'</a></li>');
+					$$('#'+dados[cidade].slug+'-ruas').append('\
+						<article id="'+dados[cidade].slug+'-'+dados[cidade].bairros[bairro].slug+'" class="list scroll indented ">\
+							<li class="theme">\
+								<div class="on-right">'+dados[cidade].cidade+'</div>\
+								<strong>Ruas do '+dados[cidade].bairros[bairro].bairro+'</strong>\
+							</li>\
+							<ul id="'+dados[cidade].slug+'-'+dados[cidade].bairros[bairro].slug+'-ruas">\
+							</ul>\
+						</article>\
+					');
+					for(rua in dados[cidade].bairros[bairro].ruas){
+						$$('#'+dados[cidade].slug+'-'+dados[cidade].bairros[bairro].slug+'-ruas').append('<li><a herf="#" data-view-section="listagem-eleitores">'+dados[cidade].bairros[bairro].ruas[rua]+'</a></li>')
 					}
-					$$('#aside-itens').append('\
-						<li data-view-article="form-login" data-icon="signout" class="dinamic" id="logout"> \
-							<span class="icon signout"></span>\
-							<strong>Sair</strong> \
-						</li>'
-					);
 				}
-			);
+			}
 		}else{
 			$$("#main-header").hide();
 			$$("#login-header").show();
@@ -120,11 +77,11 @@ $$(function() {
 		return this;
 	};
 
-
+/*
 	$$("#refresh").tap(function() {
 		$$("#home-itens").html('');
 		$$(".dinamic").remove();
-		load(aluno,unidade);
+		load(usuario);
 	});
 	$$("#logout").tap(function() {
 		localStorage.clear();
@@ -148,8 +105,7 @@ $$(function() {
 			type: 'GET', // defaults to 'GET'
 			url: BASE_URL+'loginMobile.php',
 			data:{
-				unidade : $$("#unidade").val(),
-				aluno : $$("#aluno").val(),
+				usuario : $$("#usuario").val(),
 				senha : $$("#senha").val()
 			},
 			dataType: 'json', //'json', 'xml', 'html', or 'text'
@@ -167,17 +123,15 @@ $$(function() {
 						}
 					);
 				} else{
-					aluno = $$("#aluno").val();
-					unidade = $$("#unidade").val();
+					usuario = $$("#usuario").val();
 					if ( $$("#lembrar")[0].checked) {
-						localStorage.setItem('aluno',aluno);
-						localStorage.setItem('unidade',unidade);
+						localStorage.setItem('usuario',usuario);
 					};
 					$$("#main").attr('data-aside','features');
-					load(aluno,unidade);
+					load(usuario);
 				};
 			},
 		});
-	});
-	load(aluno,unidade);
+	});*/
+	load(usuario);
 });
